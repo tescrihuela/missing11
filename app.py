@@ -2,53 +2,40 @@
 
 import flask
 import dash
-import dash_table
-import dash_html_components as html
+from dash import dash_table
+from dash import html
 import pandas as pd
-
-from tdf import coureurs, file
-
+import missing
 
 #########
 # Serveur
 server = flask.Flask(__name__)
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__, server=server, title='Fantasy Cheat', external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, server=server, title='Missing11 choice', external_stylesheets=external_stylesheets)
 app.config.suppress_callback_exceptions = True
 
-df = pd.read_csv(file)
+df = pd.read_csv("missing11.csv")
+df["URL"] = df["URL"].apply(lambda x: f'[{x}]({x})')
 
 ##############
 ### Layout
 app.layout = html.Div(
     children=[
-        html.H1('Tour de France 2021 pour Fantasy League by Gros',className='logo'),
+        html.H1('Tous les matchs de Missing 11 pour des moments de qualité entre collègues',className='logo'),
         html.Div([
             dash_table.DataTable(
                 id='datatable-interactivity',
                 columns=[
-                    {"name": i, "id": i, "deletable": False, "selectable": True} for i in df.columns
+                    {"name": i, "id": i, "deletable": False, "selectable": True, "presentation": 'markdown'} for i in df.columns
                 ],
-                # tooltip={'Fantasy Score': {'type': 'text', 'value': 'Points obtenus lors de la prochaine étape si aucun changement aux classements'}},
                 style_header={
                     'backgroundColor': 'rgb(230, 230, 230)',
                     'fontWeight': 'bold'
                 },
-                style_cell_conditional=[
-                    {
-                        'if': {'column_id': col},
-                        'textAlign': 'left'
-                    } for col in ['Coureur','Equipe']
-                ] + [
-                    {
-                        'if': {'column_id': col},
-                        'fontWeight': 'bold'
-                    } for col in ['Fantasy Score']
-                ],
                 style_data_conditional=[
                     {
                         'if': {'row_index': 'odd'},
-                        'backgroundColor': 'rgb(248, 248, 248)'
+                        'backgroundColor': 'rgb(240, 240, 240)'
                     }
                 ],
                 data=df.to_dict('records'),
@@ -56,24 +43,19 @@ app.layout = html.Div(
                 filter_action="native",
                 sort_action="native",
                 sort_mode="multi",
-                # column_selectable="single",
-                # row_selectable="multi",
-                # row_deletable=True,
                 selected_columns=[],
                 selected_rows=[],
                 page_action="native",
-                # page_current= 0,
-                page_size= 300,
+                page_size= 3000,
             )
         ]),
         html.Div(
             children=[
-                "Source : ", html.A("Github", href="https://github.com/tescrihuela/tdf"),
+                "Source : ", html.A("Github", href="https://github.com/tescrihuela/missing11"),
             ]
         )
     ]
 )
-
 
 ######
 # Main

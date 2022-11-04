@@ -1,6 +1,5 @@
-## Tableau de bord pour Fantasy
+## Missing 11 scrapping
 
-Accessible ici : https://fantasy-tdf.herokuapp.com/
+Accessible ici : https://missing11.herokuapp.com/
 
-Se base sur https://tourdefrance2021.fr/ pour scrapper les résultats.
-Calcule le score Fantasy : le nombre de points obtenus sur [Fantasy](https://fantasy.letour.fr/) par le coureur en fonction de son classement général, montagne, à points et jeune.
+Permet de lister tous les matchs de Missing11.
