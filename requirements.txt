@@ -5,5 +5,4 @@ flask
 gunicorn
 requests
 pandas
-random
 selenium
