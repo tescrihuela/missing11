@@ -1,8 +1,11 @@
 bs4
+csv
 dash
-dash_html_components
-dash_table
+datetime
 flask
 gunicorn
 requests
 pandas
+pprint
+random
+selenium
