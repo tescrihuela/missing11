@@ -4,6 +4,10 @@ dash
 datetime
 flask
 gunicorn
+libnss3
+libgconf
+libfontconfig
+libglib2
 requests
 pandas
 selenium
