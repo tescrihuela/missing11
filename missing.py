@@ -1,9 +1,12 @@
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 import random
 from pprint import pprint
 import csv
 import datetime
+from git import Repo
+
 
 #############
 ## Paramètres
@@ -18,7 +21,7 @@ options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument(f"--remote-debugging-port={random.randint(5000,9999)}")  # this
-browser = webdriver.Chrome(options=options, executable_path='./chromedriver')
+browser = webdriver.Chrome(options=options, executable_path=ChromeDriverManager().install())                                                                                                                         
 
 ############
 ## Fonctions
@@ -67,6 +70,16 @@ def write_csv(file, delete):
 			writer = csv.writer(csvfile)
 			writer.writerows(matchs)
 
+def git_push():
+    try:
+        repo = Repo("$HOME/depots/missing11")
+        repo.git.add(update=True)
+        repo.index.commit("update data")
+        origin = repo.remote(name='origin')
+        origin.push()
+    except:
+        print('Some error occured while pushing the code') 
+
 
 ######
 # Main
@@ -78,6 +91,7 @@ if difference_jours != 0:
 	for i in range(id_derniere_publication + 1, id_derniere_publication +1 + difference_jours):
 		scrap_match(i)
 	write_csv(file, False)
+	git_push()
 else:
 	print("Déjà à jour")
 
