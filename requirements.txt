@@ -1,4 +1,6 @@
 bs4
+chromedriver
+chromium-browser
 dash
 datetime
 flask
