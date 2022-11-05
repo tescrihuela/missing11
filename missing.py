@@ -20,7 +20,7 @@ matchs = []
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
-options.add_argument(f"--remote-debugging-port={random.randint(5000,9999)}")  # this
+options.add_argument(f"--remote-debugging-port={random.randint(5000,9999)}")
 browser = webdriver.Chrome(options=options, executable_path=ChromeDriverManager().install())                                                                                                                         
 
 ############
