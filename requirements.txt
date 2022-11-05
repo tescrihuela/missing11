@@ -7,3 +7,4 @@ gunicorn
 requests
 pandas
 selenium
+webdriver_manager
