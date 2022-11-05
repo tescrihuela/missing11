@@ -3,6 +3,7 @@ chromedriver
 dash
 datetime
 flask
+git
 gunicorn
 requests
 pandas
