@@ -5,6 +5,7 @@ from pprint import pprint
 import csv
 import datetime
 
+
 #############
 ## Paramètres
 file = 'missing11.csv'
