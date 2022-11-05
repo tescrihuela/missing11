@@ -19,9 +19,14 @@ matchs = []
 # Chrome driver
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
+<<<<<<< HEAD:missing11.py
 options.add_argument('--no-sandbox')
 options.add_argument(f"--remote-debugging-port={random.randint(5000,9999)}")
 browser = webdriver.Chrome(options=options, executable_path=ChromeDriverManager().install())                                                                                                                         
+=======
+options.add_argument(f"--remote-debugging-port={random.randint(5000,9999)}")  # this
+browser = webdriver.Chrome(options=options, executable_path='./chromedriver')
+>>>>>>> parent of d096805 (init with requirements):missing.py
 
 ############
 ## Fonctions
