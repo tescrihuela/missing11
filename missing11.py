@@ -5,30 +5,27 @@ from pprint import pprint
 import csv
 import datetime
 import os
+from git import Repo
+
 
 #############
 ## Paramètres
 file = 'missing11.csv'
 url_missing = u"https://missing11.com/?game="
 matching = {"id":276, "date":datetime.datetime.strptime("04/11/2022", '%d/%m/%Y')}
-
+chrome_path = os.environ.get("GOOGLE_CHROME_BIN")
+chromedriver_path = os.environ.get("CHROMEDRIVER_PATH")
 matchs = []
 
-# # Chrome driver
-#options = webdriver.ChromeOptions()
-#options.add_argument('--headless')
-#options.add_argument('--no-sandbox')
-#options.add_argument(f"--remote-debugging-port={random.randint(5000,9999)}")  # this
-#browser = webdriver.Chrome(options=options, executable_path='./chromedriver')
-
-# Chrome driver on heroku with buildpacks
+# Chrome driver and compatibility with heroku's buildpacks
 chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options.binary_location = chrome_path
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument(f"--remote-debugging-port={random.randint(5000,9999)}") 
-browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+browser = webdriver.Chrome(executable_path=chromedriver_path, options=chrome_options)
+
 
 ############
 ## Fonctions
@@ -77,6 +74,16 @@ def write_csv(file, delete):
 			writer = csv.writer(csvfile)
 			writer.writerows(matchs)
 
+def git_push():
+    try:
+        repo = Repo(".")
+        repo.git.add(update=True)
+        repo.index.commit(f'update data : {datetime.datetime.now().strftime("%d/%m/%Y")}')
+        origin = repo.remote(name='origin')
+        origin.push()
+    except:
+        pass
+
 
 ######
 # Main
@@ -88,6 +95,8 @@ if difference_jours != 0:
 	for i in range(id_derniere_publication + 1, id_derniere_publication +1 + difference_jours):
 		scrap_match(i)
 	write_csv(file, False)
+	git_push()
+	print("Mise à jour effectuée")
 else:
 	print("Déjà à jour")
 
