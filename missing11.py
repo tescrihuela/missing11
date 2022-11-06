@@ -1,7 +1,6 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import random
-from pprint import pprint
 import csv
 import datetime
 import os
@@ -46,7 +45,7 @@ def get_last_match_from_csv():
 
 def scrap_match(id):
 	url = f"{url_missing}{id}"
-	pprint(url)
+    print(f'Fecthing : {url}')
 	browser.get(url)
 	soup = BeautifulSoup(browser.page_source,features="html.parser")
 	intro = soup.find_all('div', {"class": "intro"})[0].find_all('div')[1:-2]
