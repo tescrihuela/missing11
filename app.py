@@ -29,6 +29,12 @@ app.layout = html.Div(
                 columns=[
                     {"name": i, "id": i, "deletable": False, "selectable": True, "presentation": 'markdown'} for i in df.columns
                 ],
+                style_cell_conditional=[
+                    {
+                        'if': {'column_id': col},
+                        'fontWeight': 'bold'
+                    } for col in ['Team à trouver']
+                ],
                 style_header={
                     'backgroundColor': 'rgb(230, 230, 230)',
                     'fontWeight': 'bold'
