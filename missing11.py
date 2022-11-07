@@ -1,4 +1,5 @@
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 import random
 import csv
@@ -12,18 +13,19 @@ from git import Repo
 file = 'missing11.csv'
 url_missing = u"https://missing11.com/?game="
 matching = {"id":276, "date":datetime.datetime.strptime("04/11/2022", '%d/%m/%Y')}
-chrome_path = os.environ.get("GOOGLE_CHROME_BIN")
-chromedriver_path = os.environ.get("CHROMEDRIVER_PATH")
+# chrome_path = os.environ.get("GOOGLE_CHROME_BIN")
+# chromedriver_path = os.environ.get("CHROMEDRIVER_PATH")
 matchs = []
 
 # Chrome driver and compatibility with heroku's buildpacks
 chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = chrome_path
+# chrome_options.binary_location = chrome_path
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument(f"--remote-debugging-port={random.randint(5000,9999)}") 
-browser = webdriver.Chrome(executable_path=chromedriver_path, options=chrome_options)
+browser = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options)
+# browser = webdriver.Chrome(executable_path=chromedriver_path, options=chrome_options)
 
 
 ############
