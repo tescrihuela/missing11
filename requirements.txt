@@ -7,5 +7,6 @@ git-python
 gunicorn
 requests
 pandas
+packaging
 selenium
 webdriver_manager
