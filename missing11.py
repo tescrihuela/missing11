@@ -23,8 +23,8 @@ chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument(f"--remote-debugging-port={random.randint(5000,9999)}") 
-browser = webdriver.Chrome(executable_path=ChromeDriverManager.install(), options=chrome_options)
-# browser = webdriver.Chrome(executable_path=chromedriver_path, options=chrome_options)
+# browser = webdriver.Chrome(executable_path=ChromeDriverManager.install(), options=chrome_options)
+browser = webdriver.Chrome(executable_path=chromedriver_path, options=chrome_options)
 
 
 ############
