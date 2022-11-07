@@ -1,5 +1,4 @@
 from selenium import webdriver
-from webdr import ChromeDriverManager
 from bs4 import BeautifulSoup
 import random
 import csv
