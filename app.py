@@ -33,7 +33,7 @@ app.layout = html.Div(
                     {
                         'if': {'column_id': col},
                         'fontWeight': 'bold'
-                    } for col in ['Team à trouver']
+                    } for col in ['Team à trouver', 'Stats']
                 ],
                 style_header={
                     'backgroundColor': 'rgb(230, 230, 230)',
