@@ -62,7 +62,7 @@ def scrap_match(id):
 def write_csv(file, delete):
 	if delete:
 		with open(file, 'w', encoding='utf8', newline='') as csvfile:
-			fieldnames = ['URL', 'Compétition', 'Année', 'Team à trouver', 'Team opposée', 'Score', 'Stade', 'Résultats', 'Date du match', 'Date de publication']
+			fieldnames = ['URL', 'Compétition', 'Année', 'Team à trouver', 'Team opposée', 'Score', 'Stade', 'Guess', 'Date du match', 'Date de publication']
 			writer = csv.writer(csvfile)
 			writer.writerow(fieldnames)
 			writer.writerows(matchs)
