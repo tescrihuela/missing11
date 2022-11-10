@@ -14,6 +14,7 @@ file = 'missing11.csv'
 url_missing = u"https://missing11.com/?game="
 matching = {"id":276, "date":datetime.datetime.strptime("04/11/2022", '%d/%m/%Y')}
 matchs = []
+chromedriver_path = f"{os.path.dirname(os.path.realpath(__file__))}/chromedriver"
 
 # Chrome driver and compatibility with heroku's buildpacks
 chrome_options = webdriver.ChromeOptions()
@@ -21,7 +22,8 @@ chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument(f"--remote-debugging-port={random.randint(5000,9999)}") 
-browser = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options)
+#browser = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options)
+browser = webdriver.Chrome(executable_path=chromedriver_path, options=chrome_options)
 
 
 ############
