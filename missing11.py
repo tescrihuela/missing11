@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import random
 import csv
 import datetime
-import os
+import os, sys
 from git import Repo
 
 
@@ -14,6 +14,7 @@ file = 'missing11.csv'
 url_missing = u"https://missing11.com/?game="
 matching = {"id":276, "date":datetime.datetime.strptime("04/11/2022", '%d/%m/%Y')}
 matchs = []
+sys.path.insert(0,os.path.dirname(os.path.realpath(__file__)))
 chromedriver_path = f"{os.path.dirname(os.path.realpath(__file__))}/chromedriver"
 
 # Chrome driver and compatibility with heroku's buildpacks
