@@ -12,7 +12,7 @@ import missing11
 # Serveur
 server = flask.Flask(__name__)
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__, server=server, title='Missing11 choice', external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, server=server, title='Missing11 choice', external_stylesheets=external_stylesheets, url_base_pathname='/missing11/')
 app.config.suppress_callback_exceptions = True
 
 df = pd.read_csv("missing11.csv")
@@ -68,4 +68,11 @@ app.layout = html.Div(
 # Main
 if __name__ == '__main__':
     app.run_server(debug=True)
+    app.config.supress_callback_exceptions = True  
+    # app.config.update({
+    #     # remove the default of '/'
+    #     'routes_pathname_prefix': '/missing11/',
 
+    #     # remove the default of '/'
+    #     'requests_pathname_prefix': '/missing11/'
+    # })
