@@ -60,7 +60,7 @@ def scrap_match(id):
 	date_match = intro[3].text
 	jour, mois, annee = date_match.split('/')
 
-	matchs.append([url, competition, annee, team1, team2, score, stade, ' ', date_match, get_publication_date(id)])
+	matchs.append([url, competition, annee, team1, team2, score, stade, '', date_match, get_publication_date(id)])
 
 def write_csv(file, delete):
 	if delete:
