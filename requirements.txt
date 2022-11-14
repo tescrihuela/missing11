@@ -6,5 +6,7 @@ flask
 git-python
 gunicorn
 requests
+packaging
 pandas
 selenium
+webdriver-manager
