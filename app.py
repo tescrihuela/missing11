@@ -20,6 +20,7 @@ df["URL"] = df["URL"].apply(lambda x: f'[{x}]({x})')
 moyenne = df["Guess"].mean().round(1)
 df["Guess"] = df["Guess"].fillna('')
 
+
 ##############
 ### Layout
 app.layout = html.Div(
