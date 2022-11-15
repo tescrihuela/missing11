@@ -49,7 +49,7 @@ app.layout = html.Div(
                     }
                 ],
                 data=df.to_dict('records'),
-                # editable=True,
+                editable=True,
                 filter_action="native",
                 sort_action="native",
                 sort_mode="multi",
