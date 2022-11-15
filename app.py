@@ -12,13 +12,14 @@ import missing11
 # Serveur
 server = flask.Flask(__name__)
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__, server=server, title='Missing11 choice', external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, server=server, title='Missing11 choice', external_stylesheets=external_stylesheets, url_base_pathname='/missing11/')
 app.config.suppress_callback_exceptions = True
 
 df = pd.read_csv("missing11.csv")
 df["URL"] = df["URL"].apply(lambda x: f'[{x}]({x})')
 moyenne = df["Guess"].mean().round(1)
 df["Guess"] = df["Guess"].fillna('')
+
 
 ##############
 ### Layout
