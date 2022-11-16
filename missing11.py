@@ -50,16 +50,21 @@ def scrap_match(id):
 	browser.get(url)
 	soup = BeautifulSoup(browser.page_source,features="html.parser")
 	intro = soup.find_all('div', {"class": "intro"})[0].find_all('div')[1:-2]
-
+	
 	match = intro[0].text
-	team1 = match.split("'")[0].strip()
-	team2 = match.split(" vs ")[-1].split(" to ")[-1].split(" with ")[-1].split(" against ")[-1].strip()
-	score = match.split("'")[1].split(" ")[1].strip()
 	competition = intro[1].text
 	stade = intro[2].text
 	date_match = intro[3].text
 	jour, mois, annee = date_match.split('/')
-
+	
+	try:
+		team1 = match.split("'")[0].strip()
+		team2 = match.split(" vs ")[-1].split(" to ")[-1].split(" with ")[-1].split(" against ")[-1].strip()
+		score = match.split("'")[1].split(" ")[1].strip()
+	except:
+		print(f"Le match {id} n'a pas la structure habituelle")
+		team1, team2, score = '', '', ''
+		
 	matchs.append([url, competition, annee, team1, team2, score, stade, '', date_match, get_publication_date(id)])
 
 def write_csv(file, delete):
@@ -95,7 +100,7 @@ if difference_jours != 0:
 	for i in range(id_derniere_publication + 1, id_derniere_publication +1 + difference_jours):
 		scrap_match(i)
 	write_csv(file, False)
-	git_push()
+#	git_push()
 	print("Mise à jour effectuée")
 else:
 	print("Déjà à jour")
