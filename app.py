@@ -6,19 +6,21 @@ import pandas as pd
 from dash import dash_table
 from dash import html
 import missing11
+import os
 
 
 #########
 # Serveur
+location = os.environ.get("MISSING11_URL_BASE_PATHNAME")
 server = flask.Flask(__name__)
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__, server=server, title='Missing11 choice', external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, server=server, title='Missing11 choice', external_stylesheets=external_stylesheets, url_base_pathname=location)
 app.config.suppress_callback_exceptions = True
 
 df = pd.read_csv("missing11.csv")
 df["URL"] = df["URL"].apply(lambda x: f'[{x}]({x})')
 moyenne = df["Guess"].mean().round(1)
-df["Guess"] = df["Guess"].fillna('')
+df = df.fillna('')
 
 
 ##############
@@ -37,7 +39,7 @@ app.layout = html.Div(
                     {
                         'if': {'column_id': col},
                         'fontWeight': 'bold'
-                    } for col in ['Team à trouver', 'Stats']
+                    } for col in ['Team à trouver']
                 ],
                 style_header={
                     'backgroundColor': 'rgb(230, 230, 230)',
@@ -67,6 +69,7 @@ app.layout = html.Div(
         )
     ]
 )
+
 
 ######
 # Main
